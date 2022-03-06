@@ -1,0 +1,13 @@
+#@ load("@ytt:data", "data")
+#@ load("metadata.lib.yaml", "metadata")
+#@ load("labels.lib.yaml", "labels")
+---
+apiVersion: v1
+kind: ServiceMonitor
+metadata: #@ metadata(data.values.grafanaName, data.values.namespace, app=data.values.grafanaName, comp=data.values.grafanaComponent, ver=data.values.grafanaVersion)
+spec:
+  endpoints:
+  - interval: 15s
+    port: http
+  selector:
+    matchLabels: #@ labels(app=data.values.grafanaName, comp=data.values.grafanaComponent)
