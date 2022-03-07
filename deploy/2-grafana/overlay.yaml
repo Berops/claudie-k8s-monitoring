@@ -1,9 +1,0 @@
-#@ load("@ytt:overlay", "overlay")
-
-#@overlay/match by=overlay.subset({"metadata": {"name":"grafana-rules"}})
----
-metadata:
-  #@overlay/match-child-defaults missing_ok=True
-  labels:
-    prometheus: k8s
-    role: alert-rules

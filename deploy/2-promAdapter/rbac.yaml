@@ -1,4 +1,5 @@
 #@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
 #@ load("/1-libs/metadata.lib.yaml", "metadata")
 #@ load("/1-libs/labels.lib.yaml", "labels")
 ---

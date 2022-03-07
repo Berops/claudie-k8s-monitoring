@@ -1,12 +1,13 @@
 #@ load("@ytt:data", "data")
+#@ load("@ytt:overlay", "overlay")
 #@ load("/1-libs/metadata.lib.yaml", "metadata")
 
-#@ overlay/match by=overlay.subset({"metadata": {"name":data.values.kubePrometheusName +"-rules"}})
+#@overlay/match by=overlay.subset({"metadata": {"name":data.values.kubePrometheusName +"-rules"}})
 ---
 metadata:
   #@overlay/match-child-defaults missing_ok=True
   labels:
-    prometheus: k8s 
+    prometheus: #@ data.values.prometheusInstance
     role: alert-rules
 ---
 apiVersion: monitoring.coreos.com/v1

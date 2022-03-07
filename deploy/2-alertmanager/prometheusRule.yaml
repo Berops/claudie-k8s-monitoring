@@ -7,12 +7,12 @@
 metadata:
   #@overlay/match-child-defaults missing_ok=True
   labels:
-    prometheus: k8s 
+    prometheus: #@ data.values.prometheusInstance
     role: alert-rules
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
-metadata: #@ metadata(data.values.alertmanagerName, app=data.values.alertmanagerName, comp=data.values.alertmanagerComponent, ns=data.values.namespace, ver=data.values.alertmanagerVersion)
+metadata: #@ metadata(data.values.alertmanagerName +"-rules", app=data.values.alertmanagerName, comp=data.values.alertmanagerComponent, ns=data.values.namespace, ver=data.values.alertmanagerVersion)
 spec:
   groups:
   - name: alertmanager.rules
