@@ -1,0 +1,18 @@
+#@ load("@ytt:data", "data")
+#@ load("/1-libs/metadata.lib.yaml", "metadata")
+#@ load("/1-libs/labels.lib.yaml", "labels")
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: #@ metadata(data.values.blackboxExporterName, app=data.values.blackboxExporterName, comp=data.values.blackboxExporterComponent, ns=data.values.namespace, ver=data.values.blackboxExporterVersion)
+spec:
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    interval: 30s
+    path: /metrics
+    port: https
+    scheme: https
+    tlsConfig:
+      insecureSkipVerify: true
+  selector:
+    matchLabels: #@ labels(app=data.values.blackboxExporterName, comp=data.values.blackboxExporterComponent)

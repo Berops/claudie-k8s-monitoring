@@ -1,0 +1,27 @@
+#@ load("@ytt:data", "data")
+#@ load("/1-libs/metadata.lib.yaml", "metadata")
+#@ load("/1-libs/labels.lib.yaml", "labels")
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
+metadata: #@ metadata(data.values.alertmanagerName, app=data.values.alertmanagerName, comp=data.values.alertmanagerComponent, ns=data.values.namespace, ver=data.values.alertmanagerVersion)
+spec:
+  image: quay.io/prometheus/alertmanager:v0.23.0
+  nodeSelector:
+    kubernetes.io/os: linux
+  podMetadata: 
+    labels: #@ labels(app=data.values.alertmanagerName, comp=data.values.alertmanagerComponent, ver=data.values.alertmanagerVersion)
+  replicas: 2
+  resources:
+    limits:
+      cpu: 100m
+      memory: 100Mi
+    requests:
+      cpu: 4m
+      memory: 100Mi
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+  serviceAccountName: #@ data.values.alertmanagerName
+  version: #@ data.values.alertmanagerVersion

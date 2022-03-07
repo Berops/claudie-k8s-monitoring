@@ -1,0 +1,6 @@
+#@ load("@ytt:data", "data")
+#@ load("/1-libs/metadata.lib.yaml", "metadata")
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata: #@ metadata(data.values.alertmanagerName, app=data.values.alertmanagerName, comp=data.values.alertmanagerComponent, ns=data.values.namespace, ver=data.values.alertmanagerVersion)

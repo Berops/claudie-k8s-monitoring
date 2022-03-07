@@ -1,0 +1,16 @@
+---
+#@ def labels(app, comp, ins="", ver="", createdBy=""):
+  app.kubernetes.io/name: #@ app
+  app.kubernetes.io/component: #@ comp
+  app.kubernetes.io/managed-by: ytt
+  app.kubernetes.io/part-of: k8s-monitoring
+  #@ if ins != "":
+  app.kubernetes.io/instance: #@ ins
+  #@ end
+  #@ if ver != "":
+  app.kubernetes.io/version: #@ ver
+  #@ end
+  #@ if createdBy != "":
+  app.kubernetes.io/created-by: #@ createdBy
+  #@ end
+#@ end

@@ -1,0 +1,13 @@
+#@ load("@ytt:data", "data")
+#@ load("/1-libs/metadata.lib.yaml", "metadata")
+#@ load("/1-libs/labels.lib.yaml", "labels")
+---
+apiVersion: v1
+kind: Service
+metadata: #@ metadata(data.values.grafanaName, app=data.values.grafanaName, comp=data.values.grafanaComponent, ns=data.values.namespace, ver=data.values.grafanaVersion)
+spec:
+  ports:
+  - name: http
+    port: 3000
+    targetPort: http
+  selector: #@ labels(data.values.grafanaName, data.values.grafanaComponent)
