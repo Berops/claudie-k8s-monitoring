@@ -27,3 +27,6 @@ grafanaVersion: "8.3.3"
 blackboxExporterName: "blackbox-exporter"
 blackboxExporterComponent: "blackbox-exporter"
 blackboxExporterVersion: "0.19.0"
+
+kubePrometheusName: "kube-prometheus"
+kubePrometheusComponent: "exporter"
