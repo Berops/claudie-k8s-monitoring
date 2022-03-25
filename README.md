@@ -11,4 +11,4 @@ The main reason for creating this project is to achieve a greater degree of flex
 
 ## Usage
 1. Create your local `data.yaml` (see `examples/data.yaml` in this repo)
-2. Execute `ytt -f data.yaml -f ...| kubectl apply --server-side -f -` TODO: Add command
+2. Execute `ytt -f data.yaml -f deploy | kubectl apply -f - --server-side`
