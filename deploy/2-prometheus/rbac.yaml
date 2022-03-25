@@ -12,7 +12,7 @@ items:
   #@ for namespace in ["default", "kube-system", data.values.namespace]:
 - apiVersion: rbac.authorization.k8s.io/v1
   kind: Role
-  metadata: #@ metadata(data.values.prometheusInstance, app=data.values.prometheusName, comp=data.values.prometheusComponent, ins=data.values.prometheusInstance, ns=namespace, ver=data.values.prometheusVersion)
+  metadata: #@ metadata(data.values.prometheusInstance, app=data.values.prometheusName, comp=data.values.prometheusComponent, ins=data.values.prometheusInstance, ns=data.values.namespace, ver=data.values.prometheusVersion)
   rules:
   - apiGroups:
     - ""
