@@ -1,0 +1,9 @@
+#@ load("labels.lib.yaml", "labels")
+---
+#@ def metadata(name, app, comp, ns="", ins="", ver="", createdBy=""):
+  labels: #@ labels(app, comp, ins, ver, createdBy)
+  name: #@ name
+  #@ if ns != "":
+  namespace: #@ ns
+  #@ end
+#@ end

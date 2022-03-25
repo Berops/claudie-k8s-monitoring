@@ -1,0 +1,15 @@
+#@ load("@ytt:data", "data")
+#@ load("/1-libs/metadata.lib.yaml", "metadata")
+#@ load("/1-libs/labels.lib.yaml", "labels")
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: #@ metadata(data.values.prometheusInstance, app=data.values.prometheusName, comp=data.values.prometheusComponent, ins=data.values.prometheusInstance, ns=data.values.namespace, ver=data.values.prometheusVersion)
+spec:
+  endpoints:
+  - interval: 30s
+    port: web
+  - interval: 30s
+    port: reloader-web
+  selector:
+    matchLabels: #@ labels(app=data.values.prometheusName, comp=data.values.prometheusComponent, ins=data.values.prometheusInstance)

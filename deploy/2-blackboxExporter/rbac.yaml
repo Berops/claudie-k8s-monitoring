@@ -1,0 +1,37 @@
+#@ load("@ytt:data", "data")
+#@ load("/1-libs/metadata.lib.yaml", "metadata")
+#@ load("/1-libs/labels.lib.yaml", "labels")
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata: #@ metadata(data.values.blackboxExporterName, app=data.values.blackboxExporterName, comp=data.values.blackboxExporterComponent, ns=data.values.namespace, ver=data.values.blackboxExporterVersion)
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: #@ metadata(data.values.blackboxExporterName, app=data.values.blackboxExporterName, comp=data.values.blackboxExporterComponent, ver=data.values.blackboxExporterVersion)
+rules:
+- apiGroups:
+  - authentication.k8s.io
+  resources:
+  - tokenreviews
+  verbs:
+  - create
+- apiGroups:
+  - authorization.k8s.io
+  resources:
+  - subjectaccessreviews
+  verbs:
+  - create
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata: #@ metadata(data.values.blackboxExporterName, app=data.values.blackboxExporterName, comp=data.values.blackboxExporterComponent, ns=data.values.namespace, ver=data.values.blackboxExporterVersion)
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: #@ data.values.blackboxExporterName
+subjects:
+- kind: ServiceAccount
+  name: #@ data.values.blackboxExporterName
+  namespace: #@ data.values.namespace

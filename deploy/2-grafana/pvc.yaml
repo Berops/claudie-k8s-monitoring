@@ -1,0 +1,13 @@
+#@ load("@ytt:data", "data")
+#@ load("/1-libs/labels.lib.yaml", "labels")
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: #@ data.values.grafanaName+"-pvc"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

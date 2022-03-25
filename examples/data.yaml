@@ -1,0 +1,32 @@
+#@data/values-schema
+---
+namespace: "monitoring"
+namespaceKubeSystem: "kube-system"
+
+promAdapterName: "prometheus-adapter"
+promAdapterComponent: "metrics-adapter"
+promAdapterVersion: "0.9.1"
+
+promOperatorName: "prometheus-operator"
+promOperatorVersion: "0.53.1"
+
+prometheusName: "prometheus"
+prometheusComponent: "prometheus"
+prometheusInstance: "prometheus-k8s"
+prometheusVersion: "2.32.1"
+prometheusSA: "prometheus-k8s"
+
+alertmanagerName: "alertmanager"
+alertmanagerComponent: "alertmanager"
+alertmanagerVersion: "0.23.0"
+
+grafanaName: "grafana"
+grafanaComponent: "grafana"
+grafanaVersion: "8.3.3"
+
+blackboxExporterName: "blackbox-exporter"
+blackboxExporterComponent: "blackbox-exporter"
+blackboxExporterVersion: "0.19.0"
+
+kubePrometheusName: "kube-prometheus"
+kubePrometheusComponent: "exporter"

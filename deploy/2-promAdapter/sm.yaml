@@ -1,0 +1,22 @@
+#@ load("@ytt:data", "data")
+#@ load("/1-libs/metadata.lib.yaml", "metadata")
+#@ load("/1-libs/labels.lib.yaml", "labels")
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata: #@ metadata(data.values.promAdapterName, app=data.values.promAdapterName, comp=data.values.promAdapterComponent, ns=data.values.namespace, ver=data.values.promAdapterVersion)
+spec:
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    interval: 30s
+    metricRelabelings:
+    - action: drop
+      regex: (apiserver_client_certificate_.*|apiserver_envelope_.*|apiserver_flowcontrol_.*|apiserver_storage_.*|apiserver_webhooks_.*|workqueue_.*)
+      sourceLabels:
+      - __name__
+    port: https
+    scheme: https
+    tlsConfig:
+      insecureSkipVerify: true
+  selector:
+    matchLabels: #@ labels(data.values.promAdapterName, data.values.promAdapterComponent)

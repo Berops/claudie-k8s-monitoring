@@ -1,0 +1,17 @@
+#@ load("@ytt:data", "data")
+#@ load("/1-libs/metadata.lib.yaml", "metadata")
+#@ load("/1-libs/labels.lib.yaml", "labels")
+---
+apiVersion: v1
+kind: Service
+metadata: #@ metadata(data.values.prometheusInstance, app=data.values.prometheusName, comp=data.values.prometheusComponent, ins=data.values.prometheusInstance, ns=data.values.namespace, ver=data.values.prometheusVersion)
+spec:
+  ports:
+  - name: web
+    port: 9090
+    targetPort: web
+  - name: reloader-web
+    port: 8080
+    targetPort: reloader-web
+  selector: #@ labels(app=data.values.prometheusName, comp=data.values.prometheusComponent, ins=data.values.prometheusInstance)
+  sessionAffinity: ClientIP
