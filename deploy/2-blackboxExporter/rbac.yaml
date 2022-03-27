@@ -8,8 +8,7 @@ metadata: #@ metadata(data.values.blackboxExporterName, app=data.values.blackbox
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
-metadata:
-  name: #@ metadata(data.values.blackboxExporterName, app=data.values.blackboxExporterName, comp=data.values.blackboxExporterComponent, ver=data.values.blackboxExporterVersion)
+metadata: #@ metadata(data.values.blackboxExporterName, app=data.values.blackboxExporterName, comp=data.values.blackboxExporterComponent, ver=data.values.blackboxExporterVersion)
 rules:
 - apiGroups:
   - authentication.k8s.io
